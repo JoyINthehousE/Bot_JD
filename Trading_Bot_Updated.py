@@ -11,8 +11,8 @@ import numpy as np
 
 
 # Enter your API Key and Secret here. If you don't have one, you can generate it from the website.
-key = "18672fb65b1378d14c06ce568317a2ef210e5dab92326d63"
-secret = "79a62e7fe54d655e87198c443a006816431cd306fad2c088252f1dd1bdf52925"
+key = st.secrets("API_Key")
+secret = st.secrets("Secret")
 
 # python3
 secret_bytes = bytes(secret, encoding='utf-8')
@@ -106,10 +106,7 @@ while True:
         t3_slow = talib.T3(df_price['close'], timeperiod = 13, vfactor = 0.6)
         if not t3_slow.empty and not t3_fast.empty:
             if t3_slow.iloc[-1] > t3_fast.iloc[-1]:
-                bid_price = markets_df.loc[markets_df['market'] == i, 'bid'].values[0]
-                bid_price_float = float(bid_price)
-                qty = df_account.loc[df_account['currency'] == name, 'balance'].values[0]
-                order('sell', name, qty, bid_price_float)
+                st.write(f"sell {name}")
         
     for name in inr_candles:
         bitch = name[:-3] + '_' + name[-3:]
@@ -120,10 +117,4 @@ while True:
         t3_slow = talib.T3(df_price['close'], timeperiod = 13, vfactor = 0.6)
         if not t3_slow.empty and not t3_fast.empty:
             if t3_slow.iloc[-1] > t3_fast.iloc[-1]:
-                ask_price = markets_df.loc[markets_df['market'] == i, 'ask'].values[0]
-                ask_price_float = float(ask_price)
-                balenciaga = df_account.loc[df_account['currency'] == 'INR', 'balance'].values[0]
-                balenciaga_float = float(balenciaga)
-                qty = round(balenciaga_float/ask_price_float,0)
-                ask_price_rounded = round(ask_price,0)
-                order('buy', name, qty, ask_price_rounded)
+                st.write(f"buy {name}")
