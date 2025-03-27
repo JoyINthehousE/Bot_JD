@@ -5,7 +5,7 @@ import json
 import time
 import requests
 import pandas as pd
-import pandas_ta as ta
+import pandas-ta as ta
 import datetime as dt
 import numpy as np
 
