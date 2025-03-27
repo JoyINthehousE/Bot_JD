@@ -4,8 +4,8 @@ import base64
 import json
 import time
 import requests
-import talib
 import pandas as pd
+import pandas_ta as ta
 import datetime as dt
 import numpy as np
 
