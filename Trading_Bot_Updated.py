@@ -8,6 +8,7 @@ import pandas as pd
 import pandas_ta as ta
 import datetime as dt
 import numpy as np
+import streamlit as st
 
 
 # Enter your API Key and Secret here. If you don't have one, you can generate it from the website.
@@ -102,10 +103,12 @@ while True:
         response_price = requests.get(url_candles)
         data_price = response_price.json()
         df_price = pd.DataFrame(data_price)
-        t3_fast = talib.T3(df_price['close'], timeperiod = 8, vfactor = 0.7)
-        t3_slow = talib.T3(df_price['close'], timeperiod = 13, vfactor = 0.6)
-        if not t3_slow.empty and not t3_fast.empty:
-            if t3_slow.iloc[-1] > t3_fast.iloc[-1]:
+        t3_fast = ta.T3(df_price['close'], timeperiod = 8, vfactor = 0.7)
+        t3_slow = ta.T3(df_price['close'], timeperiod = 13, vfactor = 0.6)
+        t3_slow_cleared = t3_slow.dropna()
+        t3_fast_cleared = t3_fast.dropna()
+        if not t3_slow_cleared.empty and not t3_fast_cleared.empty:
+            if t3_slow_cleared.iloc[-1] > t3_fast_cleared.iloc[-1]:
                 st.write(f"sell {name}")
         
     for name in inr_candles:
@@ -113,8 +116,10 @@ while True:
         url_candles  = f"https://public.coindcx.com/market_data/candles?pair=I-{bitch}&interval=30m"
         response_price = requests.get(url_candles)
         df_price = pd.DataFrame(data_price)
-        t3_fast = talib.T3(df_price['close'], timeperiod = 8, vfactor = 0.7)
-        t3_slow = talib.T3(df_price['close'], timeperiod = 13, vfactor = 0.6)
-        if not t3_slow.empty and not t3_fast.empty:
-            if t3_slow.iloc[-1] > t3_fast.iloc[-1]:
+        t3_fast = ta.T3(df_price['close'], timeperiod = 8, vfactor = 0.7)
+        t3_slow = ta.T3(df_price['close'], timeperiod = 13, vfactor = 0.6)
+        t3_slow_cleared = t3_slow.dropna()
+        t3_fast_cleared = t3_fast.dropna()
+        if not t3_slow_cleared.empty and not t3_fast_cleared.empty:
+            if t3_slow_cleared.iloc[-1] > t3_fast_cleared.iloc[-1]:
                 st.write(f"buy {name}")
