@@ -12,8 +12,8 @@ import streamlit as st
 
 
 # Enter your API Key and Secret here. If you don't have one, you can generate it from the website.
-key = st.secrets("API_Key")
-secret = st.secrets("Secret")
+key = 18672fb65b1378d14c06ce568317a2ef210e5dab92326d63
+secret = 79a62e7fe54d655e87198c443a006816431cd306fad2c088252f1dd1bdf52925
 
 # python3
 secret_bytes = bytes(secret, encoding='utf-8')
