@@ -103,8 +103,8 @@ while True:
         response_price = requests.get(url_candles)
         data_price = response_price.json()
         df_price = pd.DataFrame(data_price)
-        t3_fast = ta.T3(df_price['close'], timeperiod = 8, vfactor = 0.7)
-        t3_slow = ta.T3(df_price['close'], timeperiod = 13, vfactor = 0.6)
+        t3_fast = ta.t3(df_price['close'], timeperiod = 8, vfactor = 0.7)
+        t3_slow = ta.t3(df_price['close'], timeperiod = 13, vfactor = 0.6)
         t3_slow_cleared = t3_slow.dropna()
         t3_fast_cleared = t3_fast.dropna()
         if not t3_slow_cleared.empty and not t3_fast_cleared.empty:
@@ -116,8 +116,8 @@ while True:
         url_candles  = f"https://public.coindcx.com/market_data/candles?pair=I-{bitch}&interval=30m"
         response_price = requests.get(url_candles)
         df_price = pd.DataFrame(data_price)
-        t3_fast = ta.T3(df_price['close'], timeperiod = 8, vfactor = 0.7)
-        t3_slow = ta.T3(df_price['close'], timeperiod = 13, vfactor = 0.6)
+        t3_fast = ta.t3(df_price['close'], timeperiod = 8, vfactor = 0.7)
+        t3_slow = ta.t3(df_price['close'], timeperiod = 13, vfactor = 0.6)
         t3_slow_cleared = t3_slow.dropna()
         t3_fast_cleared = t3_fast.dropna()
         if not t3_slow_cleared.empty and not t3_fast_cleared.empty:
