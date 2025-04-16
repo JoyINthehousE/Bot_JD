@@ -4,4 +4,3 @@ pandas
 requests
 pandas_ta
 streamlit
---upgrade setuptools
